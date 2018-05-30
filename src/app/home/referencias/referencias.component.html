@@ -1,0 +1,20 @@
+<div class="card">
+
+    <div class="card-header">
+      <h4 class="card-title">Saludo / referencias</h4>
+    </div>
+    <div class="card-body">
+      <div class="form-group">
+        <label for="userName">Nombre</label>
+        <input type="text" #nombre
+          class="form-control" name="userName" id="userName"  placeholder="">
+      </div>
+      <p class="card-text">Text</p>
+      <button (click)="nombre.value = nombre.value">Saludar</button>
+      <button (click)="nombre.value = ''">Borrar</button>
+    </div>
+    <div class="card-footer text-muted">
+        Hola {{ nombre.value }}
+    </div>
+  </div>
+  

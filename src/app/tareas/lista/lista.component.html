@@ -1,0 +1,16 @@
+
+<div *ngIf="aItems.length" class="card">
+  <div class="card-header">
+    <h4 class="card-title">Lista de tareas</h4>
+  </div>
+  <div class="card-body">
+    <ul>
+      <li *ngFor="let item of aItems; let i = index">{{item}} 
+        <button type="button" (click)="btnBorrar(i)"
+          class="btn btn-danger btn-sm">Borrar</button>
+      </li>
+    </ul>
+  </div>
+  <div class="card-footer text-muted">
+  </div>
+</div>
