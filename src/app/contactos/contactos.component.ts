@@ -3,9 +3,9 @@ import { Component, OnInit } from '@angular/core';
 @Component({
   selector: 'kc-contactos',
   template: `
-    <p>
-      contactos works!
-    </p>
+    <div class="row">
+      <kc-form-vd class="col"></kc-form-vd>
+    </div>
   `,
   styles: []
 })

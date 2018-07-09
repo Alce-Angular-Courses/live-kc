@@ -1,0 +1,83 @@
+<form #formulario="ngForm" (ngSubmit)="enviar()">
+    <!--Text-->
+    <fieldset>
+        <legend>Datos del Usuario</legend>
+        <!-- Etiqueta / Campo "Nombre" -->
+        <div class="form-group row">
+            <label for="name" class="col-3">Nombre</label>
+            <input type="text" class="form-control col-9" #nameState="ngModel" name="name" id="name" [(ngModel)]="contacto.name" required minlength="3" placeholder="Indica tu nombre (es obligatorio)">
+        </div>
+        <div [hidden]="nameState.valid || nameState.untouched ">
+                <div class="error-message" [hidden]="!nameState.errors?.required">
+                    El nombre es obligatorio</div>
+                <div class="error-message" [hidden]="!nameState.errors?.minlength">
+                    El nombre debe tener un mínimo de 3 caracteres
+                </div>
+            </div>
+
+        <!--Etiqueta / Campo "Apellidos"-->
+        <div class="form-group row">
+            <label for="lastname" class="col-3">Apellidos</label>
+            <input type="text" class="form-control col-9" id="lastname" name="lastname" [(ngModel)]="contacto.lastname" required placeholder="Indica tu apellido (es obligatorio)">
+        </div>
+        <!--Etiqueta / Campo "Correo"-->
+        <div class="form-group row">
+            <label for="eMail" class="col-3">Correo</label>
+            <input type="email" class="form-control col-9" id="eMail" name="eMail" [(ngModel)]="contacto.email" required placeholder="Indica tu email (es obligatorio)">
+        </div>
+        <!--Etiqueta / Campo "Telefono"-->
+        <div class="form-group row">
+            <label for="phoneNumber" class="col-3">Teléfono</label>
+            <input type="text" class="form-control col-9" id="phoneNumber" name="phoneNumber" [(ngModel)]="contacto.phoneNumber" required
+                pattern="^[9|6]{1}([\d]{2}[-]*){3}[\d]{2}$" placeholder="9xx-xx-xx-xx (es obligatorio)">
+        </div>
+    </fieldset>
+    <!--Select/options -->
+    <fieldset class="form-group">
+        <!--Etiqueta / Campo "Grupo"-->
+        <legend>Grupo</legend>
+        <div class="form-group row">
+            <select class="form-control" id="grupo" name="grupo" [(ngModel)]="contacto.grupo">
+                <option *ngFor="let grupo of aGrupos" [ngValue]="grupo"> {{grupo.nombre}} </option>
+            </select>
+        </div>
+    </fieldset>
+    <div class="optional row">
+        <!--Radio-Buttos-->
+        <fieldset class="form-group col" *ngIf="contacto.grupo?.nombre=='Negocios' 
+                        || contacto.grupo?.nombre=='Trabajo'">
+            <!--Etiqueta / Campo "Sector laboral"-->
+            <legend>Sector laboral</legend>
+            <div class="form-check" *ngFor="let sector of aSectores">
+                <label class="form-check-label">
+                    <input type="radio" class="form-check-input" name="sector" [id]="sector.nombre" [value]="sector" [(ngModel)]="contacto.sector"> {{sector.nombre}}
+                </label>
+            </div>
+        </fieldset>
+        <!--Checkbox-->
+        <fieldset class="form-group col" *ngIf="contacto.grupo?.nombre=='Familia'
+        || contacto.grupo?.nombre=='Amigos'">
+            <legend>Aficiones</legend>
+            <div class="form-check" *ngFor="let aficion of aAficiones; let state">
+                <label class="form-check-label">
+                    <input type="checkbox" class="form-check-input" [id]="aficion.nombre" 
+                    [name]="aficion.nombre" (change)="changeAficiones($event)"> {{aficion.nombre}}
+                </label>
+            </div>
+        </fieldset>
+    </div>
+    <div class="form-group row">
+        <button type="submit" class="btn btn-primary mr-2"
+            [disabled]="formulario.invalid">
+            Enviar</button>
+        <button type="reset" class="btn btn-primary"
+            [disabled]="formulario.pristine">
+            Borrar</button>
+    </div>
+</form>
+
+{{ contacto | json }}
+<br> pristine {{ formulario.pristine}}
+<br> untouched {{formulario.untouched}}
+<br> valid {{formulario.valid}}
+<br>
