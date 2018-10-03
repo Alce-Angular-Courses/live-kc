@@ -7,6 +7,7 @@ import { Component, OnInit } from '@angular/core';
       <kc-mock-books class="col-6 mb-4"></kc-mock-books>
       <kc-google-books class="col-6 mb-4"></kc-google-books>
       <kc-google-by-service class="col-6 mb-4"></kc-google-by-service>
+      <kc-lista class="col-6 mb-4">"</kc-lista>
     </div>
   `,
   styles: []
